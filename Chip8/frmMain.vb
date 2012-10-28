@@ -1,5 +1,5 @@
 'Option Strict On
-Imports System.IO
+Imports system.IO
 'Commented out code was for debugging purposes
 
 Public Class frmMain
@@ -12,7 +12,7 @@ Public Class frmMain
     Dim memory(4096 - 1) As Byte
 
     'Stack, stack pointer
-    Dim stack(16) As UInt16
+    Dim stack(16 - 1) As UInt16
     Dim sp As UInt16 = 0
 
     'Timers, should count down at 60HZ
@@ -39,14 +39,15 @@ Public Class frmMain
 
     'Screen stuff
     Dim screenMultiplier As Int16 = 4
-    Dim screen(64 * 32) As Byte '????
+    Dim screen(64 * 32 - 1) As Boolean '????
     Dim bitmap As New Bitmap(64 * screenMultiplier, 32 * screenMultiplier)
     Dim screenG As Graphics = Me.CreateGraphics
+    Dim g As Graphics
     Dim bmpG As Graphics = Graphics.FromImage(bitmap)
     Dim pixel As New Rectangle(0, 0, screenMultiplier, screenMultiplier)
     Dim draw As Boolean
-    Dim colorFore As Color = Color.White
-    Dim colorBack As Color = Color.Black
+    Dim colorFore As Color = Color.Black
+    Dim colorBack As Color = Color.White
 
     'Error handling
     Dim maxPc As UInt16
@@ -118,21 +119,43 @@ Public Class frmMain
             Console.WriteLine(memory(pc + &H200) & ", " & (pc + &H200))
         Next
         maxPc = pc + &H200
-    End Sub 'Complete
+    End Sub 'Complete, Use this one
 
     Private Sub LoadMemory()
+        Reset()
         For pc = 0 To fontSet.Length - 1
             memory(pc) = fontSet(pc)
         Next pc
         Using reader As New BinaryReader(File.Open("C:\Chip8\GAMES\UFO", FileMode.Open))
             For pc = 0 To reader.BaseStream.Length - 1
                 memory(pc + &H200) = reader.ReadByte()
-                Console.WriteLine(memory(pc + &H200) & ", " & (pc + &H200))
+                ''console.writeLine(memory(pc + &H200) & ", " & (pc + &H200))
             Next
             maxPc = pc + &H200
             'pc = &H200
         End Using
-    End Sub 'COMPLETE
+    End Sub 'COMPLETE, Obsolete
+
+    Private Sub LoadFileMemory(ByVal filename As String)
+        Reset()
+        Dim loadedProgramBytes() As Byte
+        Try
+            loadedProgramBytes = File.ReadAllBytes(filename)
+        Catch ex As Exception
+            Console.WriteLine(ex.ToString())
+            loadedProgramBytes = Nothing
+            Exit Sub
+        End Try
+
+        If Not (loadedProgramBytes Is Nothing) Then
+            For pc = 0 To loadedProgramBytes.Length - 1
+                memory(pc + &H200) = loadedProgramBytes(pc)
+            Next
+            maxPc = pc + &H200
+        End If
+        'Emulate()
+
+    End Sub
 
     Private Sub Reset()
         Dim j As Int32
@@ -166,8 +189,8 @@ Public Class frmMain
 
         Reset()
 
-        LoadMemory()
-        'LoadResourceMemory()
+        'LoadMemory()
+        LoadResourceMemory()
 
         pc = &H200
 
@@ -188,6 +211,27 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub UpdateDisplay()
+        g.Clear(colorBack)
+        g.DrawImage(GFXToBitmap, New Rectangle(0, 0, 320, 160))
+        graphicsDevice.Invalidate()
+    End Sub
+
+    Private Function GFXToBitmap() As Bitmap
+        Dim bmp As New Bitmap(64, 32)
+        Dim y, x As Integer
+        For y = 0 To 31
+            For x = 0 To 63
+                If screen((y * 64) + x) Then
+                    bmp.SetPixel(x, y, colorFore)
+                Else
+                    bmp.SetPixel(x, y, colorBack)
+                End If
+            Next
+        Next
+        Return bmp
+    End Function
+
     Private Sub Emulate()
 
         While pc < maxPc 'should always be true
@@ -197,16 +241,7 @@ Public Class frmMain
             'lstDebug.Items.Add(opcode)
             OpcodeSwitch(opcode)
             If draw Then
-                bmpG.Clear(colorBack)
-                Dim i, j As Int16
-                For j = 0 To 31
-                    For i = 0 To 63
-                        If screen((j * 64) + i) = 1 Then
-                            DrawPixel(i, j)
-                        End If
-                    Next
-                Next
-                draw = 0
+                UpdateDisplay()
             End If
         End While
     End Sub
@@ -222,80 +257,110 @@ Public Class frmMain
             If nibble(3) Then 'RET
                 sp -= 1
                 pc = stack(sp)
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("RET")
                 pc += 2
-                System.Console.WriteLine()
-                System.Console.WriteLine(opcode)
-                System.Console.WriteLine("RET")
             Else 'CLS
-                bmpG.Clear(colorBack)
+                Dim counter As Int16
+                For counter = 0 To screen.Length - 1
+                    screen(counter) = 0
+                Next
                 draw = 1
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
                 pc += 2
-                System.Console.WriteLine()
-                System.Console.WriteLine(opcode)
-                System.Console.WriteLine("CLS")
             End If
         ElseIf nibble(0) = &H1 Then 'JP addr 
             pc = opcode And &HFFF
-            System.Console.WriteLine()
-            System.Console.WriteLine(opcode)
-            System.Console.WriteLine("JP " & (opcode And &HFFF))
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("JP " & (opcode And &HFFF))
         ElseIf nibble(0) = &H2 Then 'CALL addr
+            stack(sp) = pc
             sp += 1
-            stack(0) = pc
             pc = opcode And &HFFF
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("PC = " & pc)
+            Console.WriteLine("CALL " & (opcode And &HFFF))
         ElseIf nibble(0) = &H3 Then 'SE Vx, byte
             If V(nibble(1)) = (opcode And &HFF) Then
                 pc += 4
             Else
                 pc += 2
             End If
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("SE V" & nibble(1) & ", " & (opcode And &HFF))
         ElseIf nibble(0) = &H4 Then 'SNE Vx, byte
             If V(nibble(1)) = (opcode And &HFF) Then
                 pc += 2
             Else
                 pc += 4
             End If
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("SNE V" & nibble(1) & ", " & (opcode And &HFF))
         ElseIf nibble(0) = &H5 Then 'SE Vx, Vy
             If V(nibble(1)) = V(nibble(2)) Then
                 pc += 4
             Else
                 pc += 2
             End If
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("CLS")
         ElseIf nibble(0) = &H6 Then 'LD Vx, byte
             V(nibble(1)) = opcode And &HFF
             pc += 2
-            System.Console.WriteLine()
-            System.Console.WriteLine(opcode)
-            System.Console.WriteLine("LD " & nibble(1) & ", " & (opcode And &HFF))
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("LD " & nibble(1) & ", " & (opcode And &HFF))
         ElseIf nibble(0) = &H7 Then 'ADD Vx, byte
-            V(nibble(1)) += opcode And &HFF
+            V(nibble(1)) = (V(nibble(1)) + opcode And &HFF) Mod 2 ^ 8
             pc += 2
-            System.Console.WriteLine()
-            System.Console.WriteLine(opcode)
-            System.Console.WriteLine("ADD " & nibble(1) & (opcode And &HFF))
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("ADD " & nibble(1) & (opcode And &HFF))
         ElseIf nibble(0) = &H8 Then 'Multiple
             If nibble(3) = 0 Then 'LD Vx, Vy
                 V(nibble(1)) = V(nibble(2))
                 pc += 2
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
             ElseIf nibble(3) = 1 Then 'OR Vx, Vy
                 V(nibble(1)) = V(nibble(1)) Or V(nibble(2))
                 pc += 2
-            ElseIf nibble(3) = 2 Then
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
+            ElseIf nibble(3) = 2 Then 'AND Vx, Vy
                 V(nibble(1)) = V(nibble(1)) And V(nibble(2))
                 pc += 2
-            ElseIf nibble(3) = 3 Then 'XOR
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
+            ElseIf nibble(3) = 3 Then 'XOR Vx, Vy
                 V(nibble(1)) = V(nibble(1)) Xor V(nibble(2))
                 pc += 2
-            ElseIf nibble(3) = 4 Then 'ADD
-                V(nibble(1)) += V(nibble(2))
-                If V(nibble(1)) > 255 Then
-                    V(nibble(1)) = V(nibble(1)) And &HFF
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
+            ElseIf nibble(3) = 4 Then 'ADC Vx, Vy
+                If (V(nibble(2)) > (&HFF - V(nibble(1)))) Then
                     V(&HF) = 1
                 Else
                     V(&HF) = 0
                 End If
+                V(nibble(1)) = (V(nibble(1)) + V(nibble(2))) Mod (2 ^ 8 - 1)
                 pc += 2
-            ElseIf nibble(3) = 5 Then 'SUB
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
+            ElseIf nibble(3) = 5 Then 'SBC Vx, Vy
                 V(nibble(1)) -= V(nibble(2))
                 If V(nibble(1)) > V(nibble(2)) Then
                     V(&HF) = 1
@@ -303,10 +368,16 @@ Public Class frmMain
                     V(&HF) = 0
                 End If
                 pc += 2
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
             ElseIf nibble(3) = 6 Then 'SHR
                 V(&HF) = (V(nibble(1)) >> 8) And 1
                 V(nibble(1)) >>= 1
                 pc += 2
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
             ElseIf nibble(3) = 7 Then 'SUBN
                 V(nibble(1)) = V(nibble(2)) - V(nibble(1))
                 If V(nibble(2)) > V(nibble(1)) Then
@@ -315,14 +386,22 @@ Public Class frmMain
                     V(&HF) = 0
                 End If
                 pc += 2
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
             ElseIf nibble(3) = &HE Then 'SHL
                 V(&HF) = V(nibble(1)) And &H7F
                 V(nibble(1)) <<= 1
                 pc += 2
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
             Else
-                System.Console.WriteLine()
-                System.Console.WriteLine(opcode)
-                System.Console.WriteLine("Opcode Error: Undefined")
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("Opcode Error: Undefined")
+                Console.WriteLine("Memory:" & memory(pc))
+                Console.WriteLine("PC:" & pc)
             End If
         ElseIf nibble(0) = &H9 Then 'SNE Vx, Vy
             If V(nibble(1)) = V(nibble(2)) Then
@@ -330,26 +409,26 @@ Public Class frmMain
             Else
                 pc += 4
             End If
-            System.Console.WriteLine()
-            System.Console.WriteLine(opcode)
-            System.Console.WriteLine("SNE " & nibble(1) & ", " & nibble(2))
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("SNE " & nibble(1) & ", " & nibble(2))
         ElseIf nibble(0) = &HA Then 'LD I, addr
             I = opcode And &HFFF
             pc += 2
-            System.Console.WriteLine()
-            System.Console.WriteLine(opcode)
-            System.Console.WriteLine("LD I, " & (opcode And &HFFF))
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("LD I, " & (opcode And &HFFF))
         ElseIf nibble(0) = &HB Then 'JP V0, addr
             pc = (opcode And &HFFF) + V(0)
-            System.Console.WriteLine()
-            System.Console.WriteLine(opcode)
-            System.Console.WriteLine("JP V0, " & (opcode And &HFFF))
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("JP V0, " & (opcode And &HFFF))
         ElseIf nibble(0) = &HC Then 'RND Vx, byte
-            V(nibble(1)) = (Rnd() * 255) And (opcode And &HFF)
+            V(nibble(1)) = (Rnd() * &HFF) And (opcode And &HFF)
             pc += 2
-            System.Console.WriteLine()
-            System.Console.WriteLine(opcode)
-            System.Console.WriteLine("RND " & nibble(1) & (opcode And &HFF))
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("RND " & nibble(1) & (opcode And &HFF))
         ElseIf nibble(0) = &HD Then 'DRW Vx, Vy, nibble
             Dim x, y, height, pixel As UShort
             x = nibble(1)
@@ -361,32 +440,35 @@ Public Class frmMain
                 pixel = memory(I + j)
                 For k = 0 To 8
                     If pixel And (&H80 >> k) Then
-                        If (screen((x + k + ((y + j) * 64))) = 1) Then
+                        If (screen((x + k + ((y + j) * 64)))) Then
                             V(&HF) = 1
                         End If
-                        screen(x + k + ((y + j) * 64)) = screen(x + k + ((y + j) * 64)) Xor 1
+                        screen(x + k + ((y + j) * 64)) = (screen(x + k + ((y + j) * 64)) Xor 1)
                     End If
                 Next
             Next
             draw = 1
             pc += 2
-            System.Console.WriteLine()
-            System.Console.WriteLine(opcode)
-            System.Console.WriteLine("DRW " & nibble(1) & ", " & nibble(2) & ", " & nibble(3))
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("DRW " & nibble(1) & ", " & nibble(2) & ", " & nibble(3))
         ElseIf nibble(0) = &HE Then 'Multiple
             If nibble(2) = 9 Then 'SKP
-                If key(nibble(1)) = 1 Then
+                If key(nibble(1)) <> 0 Then
                     pc += 4
                 Else
                     pc += 2
                 End If
             ElseIf nibble(2) = &HA Then 'SKNP
-                If key(nibble(1)) = 1 Then
+                If key(nibble(1)) <> 0 Then
                     pc += 2
                 Else
                     pc += 4
                 End If
             End If
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("CLS")
         ElseIf nibble(0) = &HF Then 'Multiple
             If nibble(2) = 0 Then
                 If nibble(3) = 7 Then 'LD Vx, DT
@@ -404,29 +486,43 @@ Public Class frmMain
                             End If
                         Next
                     End While
-                    pc += 2
                 End If
+                pc += 2
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
             ElseIf nibble(2) = 1 Then
                 If nibble(3) = 5 Then 'LD DT, Vx
                     timerDelay = V(nibble(1))
                     pc += 2
+                    Console.WriteLine()
+                    Console.WriteLine(opcode)
+                    Console.WriteLine("CLS")
                 ElseIf nibble(3) = 8 Then 'LD ST, Vx
-                    timerSound += V(nibble(1))
+                    timerSound = V(nibble(1))
                     pc += 2
+                    Console.WriteLine()
+                    Console.WriteLine(opcode)
+                    Console.WriteLine("CLS")
                 ElseIf nibble(3) = &HE Then 'ADD I, Vx
                     If I + V(nibble(1)) > &HFFF Then
                         V(&HF) = 1
+                    Else
+                        V(&HF) = 0
                     End If
                     I += V(nibble(1))
                     pc += 2
                 End If
+                Console.WriteLine()
+                Console.WriteLine(opcode)
+                Console.WriteLine("CLS")
             ElseIf nibble(2) = 2 Then 'LD F, Vx
                 I = V(nibble(1)) * 5
                 pc += 2
             ElseIf nibble(2) = 3 Then 'LD B, Vx
-                memory(I) = V(nibble(1) >> 8) / 100
-                memory(I + 1) = (V(nibble(1) >> 8) / 10) Mod 10
-                memory(I + 2) = (V(nibble(1) >> 8) Mod 100) Mod 10
+                memory(I) = V(nibble(1)) / 100
+                memory(I + 1) = (V(nibble(1)) / 10) Mod 10
+                memory(I + 2) = (V(nibble(1)) Mod 100) Mod 10
                 pc += 2
             ElseIf nibble(3) = 5 Then
                 If nibble(2) = 5 Then 'LD [I], Vx
@@ -434,23 +530,33 @@ Public Class frmMain
                     For counter = 0 To nibble(1)
                         memory(I + counter) = V(counter)
                     Next
+                    I += (nibble(1) + 1)
                     pc += 2
                 ElseIf nibble(2) = 6 Then 'LD Vx, [I]
                     Dim counter As Int16
                     For counter = 0 To nibble(1)
                         V(counter) = memory(I + counter)
                     Next
+                    I += (nibble(1) + 1)
                     pc += 2
                 End If
             End If
-
         Else
-            System.Console.WriteLine()
-            System.Console.WriteLine(opcode)
-            System.Console.WriteLine("Opcode Error: Undefined")
+            Console.WriteLine()
+            Console.WriteLine(opcode)
+            Console.WriteLine("Opcode Error: Undefined")
+        End If
+        If (timerDelay > 0) Then
+            timerDelay -= 1
+        End If
+        If (timerSound > 0) Then
+            'If timerSound = 1 Then
+            Console.WriteLine("Beep")
+            'End If
+            timerSound -= 1
         End If
         'lstDebug.Items.Add(nibble(0))
-    End Sub 'COMPLETE, needs comments, debugging
+    End Sub 'COMPLETE, needs comments, major debugging
 
     Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Dim counter As Int16
@@ -485,11 +591,28 @@ Public Class frmMain
         '"Vers", "Wall", "Wipeoff" _
         '}
         'cmbRom.Items.AddRange(romList)
+        If graphicsDevice.Image Is Nothing Then
+            graphicsDevice.Image = New Bitmap(graphicsDevice.Width, graphicsDevice.Height)
+        End If
+        g = Graphics.FromImage(graphicsDevice.Image)
     End Sub
 
-    'Private Sub Form1_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Me.Paint
+    Private Sub mnuRomOpen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuRomOpen.Click
+        ofd.Title = "Choose a ROM..."
+        ofd.InitialDirectory = "E:\GAMES"
 
-    'End Sub
+        ofd.ShowDialog()
+    End Sub
 
+    Private Sub ofd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles ofd.FileOk
+        LoadFileMemory(sender.filename)
+    End Sub
 
+    Private Sub mnuFileExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuFileExit.Click
+        End
+    End Sub
+
+    Private Sub mnuRomRun_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuRomRun.Click
+        Emulate()
+    End Sub
 End Class

@@ -49,11 +49,11 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -73,9 +73,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="frmMain.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>Form1.vb</DependentUpon>
+      <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -95,46 +95,44 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Resources\15PUZZLE" />
+    <None Include="Resources\15PUZZLE.c8" />
     <None Include="Resources\15PUZZLE.SRC" />
-    <None Include="Resources\BLINKY" />
+    <None Include="Resources\BLINKY.c8" />
     <None Include="Resources\BLINKY.SRC" />
-    <None Include="Resources\BLITZ" />
-    <None Include="Resources\BREAKOUT" />
+    <None Include="Resources\BLITZ.c8" />
+    <None Include="Resources\BREAKOUT.c8" />
     <None Include="Resources\BREAKOUT.SRC" />
-    <None Include="Resources\BRIX" />
+    <None Include="Resources\BRIX.c8" />
     <None Include="Resources\BRIX.SRC" />
-    <None Include="Resources\CONNECT4" />
-    <None Include="Resources\GUESS" />
-    <None Include="Resources\HIDDEN" />
+    <None Include="Resources\CONNECT4.c8" />
+    <None Include="Resources\GUESS.c8" />
+    <None Include="Resources\HIDDEN.c8" />
     <None Include="Resources\HIDDEN.DOC" />
-    <None Include="Resources\INVADERS" />
+    <None Include="Resources\INVADERS1.c8" />
     <None Include="Resources\invaders.c8" />
-    <None Include="Resources\KALEID" />
-    <None Include="Resources\MAZE" />
+    <None Include="Resources\KALEID.c8" />
+    <None Include="Resources\MAZE.c8" />
     <None Include="Resources\MAZE.SRC" />
-    <None Include="Resources\MERLIN" />
-    <None Include="Resources\MISSILE" />
-    <None Include="Resources\PONG" />
+    <None Include="Resources\MERLIN.c8" />
+    <None Include="Resources\MISSILE.c8" />
+    <None Include="Resources\PONG.c8" />
     <None Include="Resources\PONG.SRC" />
-    <None Include="Resources\PONG2" />
     <None Include="Resources\pong2.c8" />
     <None Include="Resources\PONG2.SRC" />
-    <None Include="Resources\PUZZLE" />
-    <None Include="Resources\SQUASH" />
-    <None Include="Resources\SYZYGY" />
+    <None Include="Resources\PUZZLE.c8" />
+    <None Include="Resources\SQUASH.c8" />
+    <None Include="Resources\SYZYGY.c8" />
     <None Include="Resources\SYZYGY.SRC" />
-    <None Include="Resources\TANK" />
-    <None Include="Resources\TETRIS" />
+    <None Include="Resources\TANK.c8" />
     <None Include="Resources\tetris.c8" />
-    <None Include="Resources\TICTAC" />
-    <None Include="Resources\UFO" />
+    <None Include="Resources\TICTAC.c8" />
+    <None Include="Resources\UFO.c8" />
     <None Include="Resources\UFO.SRC" />
-    <None Include="Resources\VBRIX" />
+    <None Include="Resources\VBRIX.c8" />
     <None Include="Resources\VBRIX.SRC" />
-    <None Include="Resources\VERS" />
-    <None Include="Resources\WALL" />
-    <None Include="Resources\WIPEOFF" />
+    <None Include="Resources\VERS.c8" />
+    <None Include="Resources\WALL.c8" />
+    <None Include="Resources\WIPEOFF.c8" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

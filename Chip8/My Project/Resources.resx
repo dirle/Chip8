@@ -119,120 +119,117 @@
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="_15PUZZLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\15PUZZLE.SRC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\15puzzle.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_15PUZZLE1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\15puzzle.src;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BLINKY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BLINKY;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\blinky.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BLINKY1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BLINKY.SRC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\blinky.src;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BLITZ" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BLITZ;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\blitz.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BREAKOUT" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BREAKOUT;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\breakout.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BREAKOUT1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BREAKOUT.SRC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\breakout.src;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BRIX" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BRIX;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\brix.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BRIX1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BRIX.SRC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\brix.src;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CONNECT4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CONNECT4;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\connect4.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GUESS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GUESS;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\guess.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="HIDDEN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HIDDEN;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\hidden.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="HIDDEN1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HIDDEN.DOC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\hidden.doc;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="INVADERS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\INVADERS;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="invaders" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\invaders.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="invaders1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\invaders.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="INVADERS1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\invaders1.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="KALEID" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\KALEID;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\kaleid.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="MAZE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MAZE;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\maze.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="MAZE1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MAZE.SRC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\maze.src;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="MERLIN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MERLIN;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\merlin.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="MISSILE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MISSILE;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\missile.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PONG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PONG;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\pong.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PONG1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PONG.SRC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\pong.src;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PONG2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PONG2;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="pong2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\pong2.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="pong21" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pong2.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PONG22" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PONG2.SRC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PONG21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\pong2.src;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PUZZLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PUZZLE;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\puzzle.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="SQUASH" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SQUASH;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\squash.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="SYZYGY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SYZYGY;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\syzygy.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="SYZYGY1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SYZYGY.SRC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\syzygy.src;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TANK" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TANK;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\tank.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TETRIS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TETRIS;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tetris1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tetris.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tetris" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\tetris.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TICTAC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TICTAC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\tictac.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="UFO" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UFO;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\ufo.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="UFO1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UFO.SRC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\ufo.src;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="VBRIX" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\VBRIX;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\vbrix.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="VBRIX1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\VBRIX.SRC;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\vbrix.src;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="VERS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\VERS;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\vers.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="WALL" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WALL;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\wall.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="WIPEOFF" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WIPEOFF;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\wipeoff.c8;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
